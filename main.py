@@ -5,7 +5,7 @@ from sqlite.database import engine
 from sqlite import models
 from sqlite.database import get_db
 from sqlalchemy.orm import Session
-from sqlite.schemas import UserRequest, UserResponse, LoginRequest, User
+from sqlite.schemas import UserRequest, UserResponse, LoginRequest, TaskResponse,TaskRequest
 from sqlite import db_user
 
 app = FastAPI()
@@ -35,6 +35,10 @@ async def get_all_users(db: Session = Depends(get_db)):
 @app.post("/api/login", response_model=UserResponse)
 async def login_user(request: LoginRequest, db: Session = Depends(get_db)):
     return db_user.login_user(db, request)
+
+@app.post("/api/task", response_model=TaskResponse)
+async def create_task(request: TaskRequest, db: Session = Depends(get_db)):
+    return db_user.create_task(db, request)
 
 
 models.Base.metadata.create_all(engine)

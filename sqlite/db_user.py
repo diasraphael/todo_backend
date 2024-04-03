@@ -1,7 +1,7 @@
 from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import IntegrityError
-from .schemas import UserRequest, UserResponse
-from .models import User
+from .schemas import UserRequest, UserResponse, TaskRequest, TaskResponse
+from .models import User, Task
 from .hash import Hash
 from typing import List
 
@@ -35,6 +35,28 @@ def get_all_users(db: Session) -> List[UserResponse]:
     users = db.query(User).all()
     return [user_to_user_response(user) for user in users]
 
+def create_task(db: Session, request: TaskRequest)-> TaskResponse:
+    try:
+        new_task = Task(
+            title=request.title,
+            user_id=request.user_id,
+        )
+        db.add(new_task)
+        db.commit()
+        db.refresh(new_task)  # this allows to give us an taskId
+        return TaskResponse(
+            user_id=new_task.user_id, title=new_task.title,task_id=new_task.id
+        )
+    except IntegrityError as e:
+        # Handle IntegrityError (UNIQUE constraint violation)
+        db.rollback()
+        print(f"Error creating user: {e}")
+    finally:
+        db.close()
+
+def get_task(db:Session, id: int):
+    task = db.query(Task).filter(Task.id == id).first()
+    return task
 
 def login_user(db: Session, request: UserRequest) -> UserResponse:
     try:
