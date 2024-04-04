@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from typing import List,Optional
+from typing import List
 
 class Task(BaseModel):
     title: str
     class Config():
-        orm_mode = True
+        from_attributes = True
 
 class TaskRequest(BaseModel):
     title: str
@@ -13,9 +13,9 @@ class TaskRequest(BaseModel):
 class TaskResponse(BaseModel):
     title: str
     user_id: int
-    task_id: int
+    id: int
     class Config():
-        orm_mode = True
+        from_attributes = True
 
 
 class User(BaseModel):
@@ -24,12 +24,12 @@ class User(BaseModel):
     email: str
 
 class UserResponse(BaseModel):
-    user_id: int
+    id: int
     username: str
     email: str
-    tasks: Optional[List[Task]] = None
+    tasks: List[Task] = []
     class Config():
-        orm_mode = True
+        from_attributes = True   # this helps in converting the database type to the type we need to show to the user
 
 class UserRequest(BaseModel):
     username: str

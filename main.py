@@ -3,10 +3,7 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlite.database import engine
 from sqlite import models
-from sqlite.database import get_db
-from sqlalchemy.orm import Session
-from sqlite.schemas import UserRequest, UserResponse, LoginRequest, TaskResponse,TaskRequest
-from sqlite import db_user
+from routers import user, task
 
 app = FastAPI()
 
@@ -21,24 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.post("/api/user", response_model=UserResponse)
-async def create_user(request: UserRequest, db: Session = Depends(get_db)):
-    return db_user.create_user(db, request)
-
-
-@app.get("/api/users", response_model=List[UserResponse])
-async def get_all_users(db: Session = Depends(get_db)):
-    return db_user.get_all_users(db)
-
-
-@app.post("/api/login", response_model=UserResponse)
-async def login_user(request: LoginRequest, db: Session = Depends(get_db)):
-    return db_user.login_user(db, request)
-
-@app.post("/api/task", response_model=TaskResponse)
-async def create_task(request: TaskRequest, db: Session = Depends(get_db)):
-    return db_user.create_task(db, request)
-
+app.include_router(user.router)
+app.include_router(task.router)
 
 models.Base.metadata.create_all(engine)
