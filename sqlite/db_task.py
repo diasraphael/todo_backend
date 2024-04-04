@@ -3,7 +3,8 @@ from sqlalchemy.orm.session import Session
 from .schemas import TaskRequest, TaskResponse
 from sqlalchemy.exc import IntegrityError
 
-def create(db: Session, request: TaskRequest)-> TaskResponse:
+
+def create(db: Session, request: TaskRequest) -> TaskResponse:
     try:
         new_task = Task(
             title=request.title,
@@ -17,5 +18,18 @@ def create(db: Session, request: TaskRequest)-> TaskResponse:
         # Handle IntegrityError (UNIQUE constraint violation)
         db.rollback()
         print(f"Error creating user: {e}")
+    finally:
+        db.close()
+
+
+def delete(db: Session, id: int) -> None:
+    try:
+        task = db.query(Task).filter(Task.id == id).first()
+        print("I am printing", task, id)
+        if task:
+            db.delete(task)
+            db.commit()
+    except Exception as e:
+        print(f"An error occurred: {e}")
     finally:
         db.close()
