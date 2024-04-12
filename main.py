@@ -1,9 +1,9 @@
-from typing import List
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlite.database import engine
 from sqlite import models
-from routers import user, task
+from users.router import user_router
+from tasks.router import task_router
 
 app = FastAPI()
 
@@ -18,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user.router)
-app.include_router(task.router)
+app.include_router(user_router)
+app.include_router(task_router)
 
 models.Base.metadata.create_all(engine)

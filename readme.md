@@ -32,6 +32,12 @@ uvicorn main:app --reload
 pip install -r requirements.txt
 ```
 
+## practices followed
+
+- we have feature as single folder and have router, model, schemas, db_repository as classes to communicate with each other.
+  router - gets the request from the client
+  db_repository - router class communicates with this class to connect to the db and bring data to the user
+
 ### ORM library
 
 checklist
