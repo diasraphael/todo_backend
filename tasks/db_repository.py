@@ -2,7 +2,11 @@ from .models import Task
 from sqlalchemy.orm.session import Session
 from .schemas import TaskRequest, TaskResponse
 from sqlalchemy.exc import IntegrityError
+from typing import List
 
+def get(db: Session) -> List[TaskResponse]:
+    tasks = db.query(Task).all()
+    return tasks
 
 def create(db: Session, request: TaskRequest) -> TaskResponse:
     try:
