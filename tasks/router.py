@@ -8,9 +8,9 @@ from typing import List
 task_router = APIRouter(prefix="/api/tasks", tags=["task"])
 
 
-@task_router.get("/", response_model=List[TaskResponse])
-async def get_tasks(db: Session = Depends(get_db)):
-    return db_repository.get(db)
+@task_router.get("/{user_id}", response_model=List[TaskResponse])
+async def get_tasks(user_id: int, db: Session = Depends(get_db)):
+    return db_repository.get_tasks(db, user_id)
 
 
 @task_router.post("/create", response_model=TaskResponse)
