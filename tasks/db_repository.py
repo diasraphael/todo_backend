@@ -1,4 +1,3 @@
-from users.models import User
 from .models import Task
 from sqlalchemy.orm.session import Session
 from .schemas import TaskRequest, TaskResponse
@@ -7,13 +6,8 @@ from typing import List
 
 
 def get_tasks(db: Session, user_id: int) -> List[TaskResponse]:
-    user = db.query(User).filter(User.id == user_id).first()
-    if user:
-        return (
-            user.tasks
-        )  # since we are having the relationship between User and Task, we can access the tasks of a user directly.
-    else:
-        return []
+    tasks = db.query(Task).filter(Task.user_id == user_id).all()
+    return tasks
 
 
 def create(db: Session, request: TaskRequest) -> TaskResponse:

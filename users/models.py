@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, String
 from sqlite.database import Base
-from sqlalchemy.orm import relationship
 
 
 class User(Base):
@@ -10,5 +9,3 @@ class User(Base):
     username = Column(String)
     email = Column(String, unique=True)
     password = Column(String)
-
-    tasks = relationship("Task", back_populates="user")

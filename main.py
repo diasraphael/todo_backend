@@ -3,8 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlite.database import engine
 from users import models as usersModels
 from tasks import models as tasksModels
+from task_entry import models as taskEntryModels
 from users.router import user_router
 from tasks.router import task_router
+from task_entry.router import task_entry_router
 
 app = FastAPI()
 
@@ -21,6 +23,8 @@ app.add_middleware(
 
 app.include_router(user_router)
 app.include_router(task_router)
+app.include_router(task_entry_router)
 
 usersModels.Base.metadata.create_all(engine)
 tasksModels.Base.metadata.create_all(engine)
+taskEntryModels.Base.metadata.create_all(engine)

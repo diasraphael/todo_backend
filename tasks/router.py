@@ -18,6 +18,6 @@ async def create_task(request: TaskRequest, db: Session = Depends(get_db)):
     return db_repository.create(db, request)
 
 
-@task_router.delete("/delete/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@task_router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_task(id: int, db: Session = Depends(get_db)):
     return db_repository.delete(db, id)

@@ -35,8 +35,9 @@ pip install -r requirements.txt
 ## practices followed
 
 - we have feature as single folder and have router, model, schemas, db_repository as classes to communicate with each other.
-  router - gets the request from the client
-  db_repository - router class communicates with this class to connect to the db and bring data to the user
+- router gets the request from the client
+- db_repository router class communicates with this class to connect to the db and bring data to the user
+- receiving camelCase from frontend and convert to snake_case in python
 
 ### ORM library
 
@@ -62,3 +63,7 @@ steps to do are
 2: we need to add task row under task entry table
 
 need to find the way saving the data in the db.
+
+User Table
+
+One user can have many tasks : One to many relationship(user has one to many relationship with task)
