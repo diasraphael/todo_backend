@@ -7,6 +7,7 @@ from task_entry import models as taskEntryModels
 from users.router import user_router
 from tasks.router import task_router
 from task_entry.router import task_entry_router
+from fastapi.security import OAuth2PasswordBearer
 
 app = FastAPI()
 
@@ -20,6 +21,8 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 app.include_router(user_router)
 app.include_router(task_router)

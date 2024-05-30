@@ -1,4 +1,14 @@
+from typing import Optional
 from pydantic import BaseModel
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class DataToken(BaseModel):
+    id: Optional[str] = None
 
 
 class User(BaseModel):
@@ -25,3 +35,8 @@ class UserRequest(BaseModel):
 class LoginRequest(BaseModel):
     password: str
     email: str
+
+
+class AuthenticatedResponse(BaseModel):
+    token: dict
+    user: UserResponse

@@ -67,3 +67,5 @@ need to find the way saving the data in the db.
 User Table
 
 One user can have many tasks : One to many relationship(user has one to many relationship with task)
+
+feature : Oauth2 implementation with JWT bearer token implementation

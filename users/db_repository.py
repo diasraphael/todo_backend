@@ -1,6 +1,6 @@
 from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import IntegrityError
-from .schemas import UserRequest, UserResponse
+from .schemas import LoginRequest, UserRequest, UserResponse
 from .models import User
 from sqlite.hash import Hash
 
@@ -24,7 +24,7 @@ def create(db: Session, request: UserRequest) -> UserResponse:
         db.close()
 
 
-def login(db: Session, request: UserRequest) -> UserResponse:
+def login(db: Session, request: LoginRequest) -> UserResponse:
     try:
         user = (
             db.query(User)
