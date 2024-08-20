@@ -69,3 +69,17 @@ User Table
 One user can have many tasks : One to many relationship(user has one to many relationship with task)
 
 feature : Oauth2 implementation with JWT bearer token implementation
+
+cookie authentication
+
+1. Initially we create a user in db
+2. when the user login, we send a token as cookie
+3. that token is send back from the browser in each request we send to server automatically using withcredentials attribute
+
+### Build the Docker image:
+
+docker build -t todo_backend .
+
+### Run the Docker container:
+
+docker run -p 8000:80 todo_backend # making the docker container webapp to run in 8000 port so that the frontend can hit the api with 8000 port.
