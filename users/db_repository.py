@@ -2,7 +2,7 @@ from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import IntegrityError
 from .schemas import LoginRequest, UserRequest, UserResponse
 from .models import User
-from sqlite.hash import Hash
+from db.hash import Hash
 
 
 def create(db: Session, request: UserRequest) -> UserResponse:

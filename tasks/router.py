@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, status
 from util.auth import get_user_from_token
-from sqlite.database import get_db
+from db.database import get_db
 from sqlalchemy.orm import Session
 from tasks.schemas import TaskResponse, TaskRequest
 from tasks import db_repository

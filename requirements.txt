@@ -4,4 +4,4 @@ sqlalchemy
 passlib
 bcrypt
 python-jose[cryptography]
-psycopg2-binary
+psycopg2-binary  # Make sure you have the psycopg2 library installed, as it's the PostgreSQL adapter for Python used by SQLAlchemy.

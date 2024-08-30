@@ -26,10 +26,11 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 uvicorn main:app --reload
 ```
 
-## pip install
+## pip install (Downloading from requirements.txt file)
 
 ```
 pip install -r requirements.txt
+
 ```
 
 ## practices followed

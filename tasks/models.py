@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from sqlite.database import Base
+from db.database import Base
 
 
 class Task(Base):

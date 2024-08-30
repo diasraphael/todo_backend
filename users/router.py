@@ -2,7 +2,7 @@ from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.responses import JSONResponse
 from util.auth import create_access_token
-from sqlite.database import get_db
+from db.database import get_db
 from sqlalchemy.orm import Session
 from users.schemas import (
     AuthenticatedResponse,

@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlite.database import engine
+from db.database import engine
 from users import models as usersModels
 from tasks import models as tasksModels
 from task_entry import models as taskEntryModels
