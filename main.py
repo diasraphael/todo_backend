@@ -12,7 +12,11 @@ from fastapi.security import OAuth2PasswordBearer
 app = FastAPI()
 
 # Allow requests from http://localhost:3000
-origins = ["http://localhost:3001", "http://127.0.0.1:3001"]
+origins = [
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+    "https://todo-r6t7nm7wn-dias-projects-b6aded80.vercel.app",
+]
 
 app.add_middleware(
     CORSMiddleware,
