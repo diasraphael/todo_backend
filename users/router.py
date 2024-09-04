@@ -69,3 +69,8 @@ async def login_user(
 ):
     user = db_repository.login(db, request)
     return formatUserResponse(user, response)
+
+
+@user_router.get("/hello")
+async def hello_world():
+    return {"message": "Hello, World!"}
