@@ -30,20 +30,20 @@ def formatUserResponse(user, response: JSONResponse):
     access_token = create_access_token(
         data={"user": user.id}, expires_delta=access_token_expires
     )
-    """ response.set_cookie(
+    response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
         samesite="None",
         secure=True,
-    ) """
-    response.set_cookie(
+    )
+    """ response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
         samesite="Lax",
         secure=False,
-    )
+    ) """
     return {"user": user}
     # store token in a cookie instead of sending it back as JSON
     # make sure to set the cookie settings to "secure" and "httpOnly"
